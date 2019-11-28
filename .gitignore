@@ -1,0 +1,13 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+Mining
+*csv
+*png
+*docx
+data
+out
+Maps
+sampledata
+*xlsx
