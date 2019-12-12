@@ -68,4 +68,4 @@ all_EMS3 <- filter(tidy_data,!grepl('Barometric|Biomass|Flow|Silica|Air|Streptoc
 ##params2 <- distinct(all_data_sim_EMS, Variable)
 
 write.csv(all_EMS3,
-'C:/R Projects/SimilkameenWQOs/data/similkameen_EMS.csv', row.names = FALSE)
+'C:/R Projects/SimilkameenWQOs/data/report/report/similkameen_EMS.csv', row.names = FALSE)

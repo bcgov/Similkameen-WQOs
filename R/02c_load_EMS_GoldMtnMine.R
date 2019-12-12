@@ -111,5 +111,5 @@ parameters <- distinct (sim_gm, Variable)
 
 #write csv
 write.csv(sim_gm,
-          'C:/R Projects/SimilkameenWQOs/data/sim_gm.csv', row.names = FALSE)
+          'C:/R Projects/SimilkameenWQOs/data/report/sim_gm.csv', row.names = FALSE)
 

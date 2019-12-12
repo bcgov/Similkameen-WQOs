@@ -41,5 +41,5 @@ parameter<-distinct(fedprov1, Units)
 
 
 write.csv(fedprov1,
-          'C:/R Projects/SimilkameenWQOs/data/all_fedprov.csv', row.names = FALSE)
+          'C:/R Projects/SimilkameenWQOs/data/report/all_fedprov.csv', row.names = FALSE)
 

@@ -98,4 +98,4 @@ sim_clean <- read_csv("data/sim_clean.csv")
 simCABIN <- merge.data.frame(sim_clean, CABIN2, all=TRUE)
 
 # CREATE CSV OF RAW DATA
-write.csv(simCABIN,'C:/R Projects/SimilkameenWQOs/data/simCABIN.csv', row.names = FALSE)
+write.csv(simCABIN,'C:/R Projects/Similkameen-WQOs/data/report/simCABIN.csv', row.names = FALSE)

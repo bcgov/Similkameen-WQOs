@@ -66,4 +66,4 @@ all_similkameen$Units <- revalue (all_similkameen$Units, c("ug/g"="mg/l", "col.u
 
 
 write.csv(all_similkameen,
-          'C:/R Projects/SimilkameenWQOs/data/sim_clean.csv', row.names = FALSE)
+          'C:/R Projects/SimilkameenWQOs/data/reoport/sim_clean.csv', row.names = FALSE)
