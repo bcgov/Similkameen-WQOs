@@ -16,7 +16,7 @@
 
 # Load all_EMS csv
 
-all_EMS <- read_csv("data/all_EMS.csv")
+all_EMS <- read_csv("data/report/all_EMS.csv")
 
 # Look at the replicate data to investigate whether it should stay in the data set
 
@@ -68,4 +68,5 @@ all_EMS3 <- filter(tidy_data,!grepl('Barometric|Biomass|Flow|Silica|Air|Streptoc
 ##params2 <- distinct(all_data_sim_EMS, Variable)
 
 write.csv(all_EMS3,
-'C:/R Projects/SimilkameenWQOs/data/report/report/similkameen_EMS.csv', row.names = FALSE)
+'C:/R Projects/Similkameen-WQOs/data/report/similkameen_EMS.csv', row.names = FALSE)
+

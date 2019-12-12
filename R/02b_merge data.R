@@ -4,9 +4,9 @@
 
 
 #Load csv's
-fedprov_clean <- read_csv("data/all_fedprov.csv")
+fedprov_clean <- read_csv("data/report/all_fedprov.csv")
 
-EMS_clean <- read_csv("data/similkameen_EMS.csv")
+EMS_clean <- read_csv("data/report/similkameen_EMS.csv")
 
 
 ##combine the two dataframes
@@ -66,4 +66,4 @@ all_similkameen$Units <- revalue (all_similkameen$Units, c("ug/g"="mg/l", "col.u
 
 
 write.csv(all_similkameen,
-          'C:/R Projects/SimilkameenWQOs/data/reoport/sim_clean.csv', row.names = FALSE)
+          'C:/R Projects/Similkameen-WQOs/data/report/sim_clean.csv', row.names = FALSE)
