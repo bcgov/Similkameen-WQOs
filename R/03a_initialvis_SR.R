@@ -12,10 +12,10 @@
 
 ## Load packages from script 01_load.R if needed
 
-setwd('C:/R Projects/SimilkameenWQOs/')
+setwd('C:/R Projects/Similkameen-WQOs/')
 
 # Load clean data
-sim_clean <- read_csv("data/sim_gm.csv")
+sim_clean <- read_csv("data/report/sim_clean.csv")
 
 ## mutate(DateTime=str_sub(DateTime, 1,10),
 ##       DateTime=as.POSIXct(DateTime, format="%Y-%m-%d", tz="UTC"))
@@ -30,26 +30,35 @@ sim_clean <- read_csv("data/sim_gm.csv")
 
 ##SR_Sites: "0500075", "0500724", "0500725", "E207463", "BC08NL0001", "BC08NL0005", "E299452"
 
+parameters <- distinct (sim_clean, Variable, Units, Code)
 
 ugL <- c("arsenic total", "arsenic dissolved", "copper total", "copper dissolved", "cadmium total",
-         "cadmium dissolved", "iron total", "iron dissolved", "lead total", "lead dissolved", "nickel total", "nickel dissolved",
+         "cadmium dissolved", "iron total", "iron dissolved", "lead total", "lead dissolved", 
+         "nickel total", "nickel dissolved", "calcium total", "calcium dissolved",
          "mercury total", "chromium total", "chromium dissolved", "aluminum total",
-         "aluminum dissolved", "silver total", "silver dissolved", "selenium total", "selenium dissolved", "cyanide s.a.d.",
-         "cyanide wad", "total cyanide", "manganese total", "manganese dissolved", "zinc total", "zinc dissolved", "molybdenum total",
-         "molybdenum dissolved", "uranium total", "uranium dissolved")
+         "aluminum dissolved", "silver total", "silver dissolved", "selenium total", 
+         "selenium dissolved", "cyanide s.a.d.","cobalt total", "cobalt dissolved",
+         "cyanide wad", "total cyanide", "manganese total", "manganese dissolved", "zinc total",
+         "zinc dissolved", "molybdenum total", "barium total", "barium dissolved", "boron total", "boron dissolved",
+         "molybdenum dissolved", "uranium total", "uranium dissolved", "strontium total", "strontium dissolved",
+         )
 
 mgL <- c("nitrogen ammonia total", "nitrogen dissolved nitrate", "nitrogen total nitrite",
          "nitrogen total nitrate", "nitrogen total", "nitrogen ammonia dissolved", "nitrogen total kjeldahl",
          "nitrogen total no3 & no2", "nitrogen - nitrite dissolved (no2)","nitrogen dissolved no3 & no2",
-         "nitrogen total dissolved", "tss", "sulfate dissolved", "carbon total organic",
+         "nitrogen total dissolved", "tss", "sulfate dissolved", "sulfate total", "carbon total organic",
          "carbon dissolved organic", "phosphorus total", "oxygen dissolved", "hardness (dissolved)",
-         "Total Dissolved Phosphorus")
+         "phosphorus total dissolved", "hardness total", "hardness (calcd.) caco3", "	residue: filterable 1.0u (tds)",
+         "alkalinity:total", "alkalinity total caco3", "bromide dissolved", "chloride total", "chloride dissolved",
+         "carbon dissolved inorganic", "carbon total inorganic", "magnesium total", "magnesium dissolved", 
+         "manganese total", "manganese dissolved", "potassium total", "potassium dissolved", "sodium total",
+         "sodium dissolved")
 
 
 ## PLOT DATA 1 (in a loop, make one plot per parameter)
 ## First set working directory to save plots to. This section only plots with clean data. Water quality guidelines not taken into account.
 
-setwd('C:/R Projects/SimilkameenWQOs/out/SimilkameenRiver/Recent')
+setwd('C:/R Projects/Similkameen-WQOs/out/Report/SimilkameenRiver')
 
 ## make dataframe of Similkameen River sites
 SR_sites <- filter(sim_clean, EMS_ID == "0500075" | EMS_ID == "0500724" | EMS_ID == "0500725" |
