@@ -2,7 +2,7 @@
 ### Make sure packages are loaded from 01_load.R
 
 ##this code is to download all of the fed/prov data
-sites <- wq_sites()
+##sites <- wq_sites()
 
 #bc_sites <- sites %>%
 # filter(PROV_TERR == "BC") %>%
@@ -41,5 +41,5 @@ parameter<-distinct(fedprov1, Units)
 
 
 write.csv(fedprov1,
-          'C:/R Projects/SimilkameenWQOs/data/report/all_fedprov.csv', row.names = FALSE)
+          'C:/R Projects/Similkameen-WQOs/data/report/all_fedprov.csv', row.names = FALSE)
 
