@@ -58,7 +58,7 @@ parameters <- distinct (all_similkameen, Variable, Units, Value)
 
 ## Need to standardize names for SO4- and a few nitrogen parameters
 
-library(plyr)
+#library(plyr)
 all_similkameen$Variable <- revalue (all_similkameen$Variable, c("sulphate"="sulfate total", "sulphate dissolved"="sulfate dissolved",
                                                      "nitrogen no2 total"="nitrogen total nitrite",
                                                      "nitrogen no3 total"="nitrogen total nitrate", "nitrogen kjel.tot(n)"="nitrogen total kjeldahl",
