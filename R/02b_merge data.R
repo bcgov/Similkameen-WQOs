@@ -56,22 +56,26 @@ all_similkameen <- all_similkameen %>%
 
 parameters <- distinct (all_similkameen, Variable, Units, Value)
 
-## Need to standardize names for SO4- and a few nitrogen parameters
+## Need to standardize names for SO4- and a few nitrogen parameters, tds
 
 #library(plyr)
-all_similkameen$Variable <- revalue (all_similkameen$Variable, c("sulphate"="sulfate total", "sulphate dissolved"="sulfate dissolved",
-                                                     "nitrogen no2 total"="nitrogen total nitrite",
-                                                     "nitrogen no3 total"="nitrogen total nitrate", "nitrogen kjel.tot(n)"="nitrogen total kjeldahl",
+all_similkameen$Variable <- revalue (all_similkameen$Variable, c("sulphate"="sulfate dissolved", "sulphate dissolved"="sulfate dissolved", 
+                                                                 "nitrogen total nitrite"= "nitrogen nitrite",          
+                                                     "nitrogen no2 total"="nitrogen nitrite", "nitrogen total nitrate" = "nitrogen nitrate",
+                                                     "nitrogen no3 total"="nitrogen nitrate", "nitrogen kjel.tot(n)"="nitrogen total kjeldahl",
                                                      "nitrogen (kjeldahl) total dissolved"="nitrogen dissolved kjeldahl",
-                                                     "nitrate (no3) dissolved"= "nitrogen dissolved nitrate",
+                                                     "nitrate (no3) dissolved"= "nitrogen nitrate",
                                                      "nitrate(no3) + nitrite(no2) dissolved"="nitrogen dissolved no3 & no2",
                                                      "total nitrogen no2 + no3"="nitrogen total no3 & no2", "colour true"="true color",
                                                      "residue: non-filterable (tss)"="tss", "hardness total (total)"="hardness total",
-                                                     "ammonia dissolved"="nitrogen ammonia dissolved", "nitrogen nitrite"="nitrogen total nitrite"))
+                                                     "ammonia dissolved"="nitrogen ammonia dissolved", 
+                                                     "residue: filterable 1.0u (tds)"="tds", "chlorine res:free"="chlorine residual", 
+                                                     "nitrogen - nitrite dissolved (no2)"="nitrogen nitrite",
+                                                     "nitrogen dissolved nitrate" = "nitrogen nitrate", "sulfate total" = "sulfate dissolved"))
 
 
 ## double check that parameter names were standardized
-parameters2 <- distinct (all_similkameen, Variable, Units)
+parameters2 <- distinct (all_similkameen, Variable, Units, Code)
 
 ## Standardize a few Units
 all_similkameen$Units <- revalue (all_similkameen$Units, c("ug/g"="mg/l", "col.unit"="color unit", "cu"="color unit", "ph units"="ph",
