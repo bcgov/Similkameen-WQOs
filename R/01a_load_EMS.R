@@ -40,7 +40,7 @@ library(tidyr)
 library(reshape)
 library(stats)
 library(plyr)
-
+library(magrittr)
 
 # Load the last 2 years of water quality data for the Similkameen WQO from the BC Data Catalogue using bcgov/rems package.
 # Two year data, four year data, and historic data can be downloaded.
