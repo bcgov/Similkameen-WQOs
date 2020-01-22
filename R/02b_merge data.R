@@ -54,7 +54,7 @@ all_similkameen <- all_similkameen %>%
 # Look for the parameters we are interested in
 ## Do this manually by looking at the `parameters` and `all_similkameen` dataframes
 
-parameters <- distinct (all_similkameen, Variable, Code)
+parameters3 <- distinct (all_similkameen, Variable, Code, EMS_ID)
 
 ## Need to standardize names for SO4- and a few nitrogen parameters, tds
 
