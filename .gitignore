@@ -2,12 +2,12 @@
 .Rhistory
 .RData
 .Ruserdata
-Mining
 *csv
 *png
 *docx
-data
 out
+data
 Maps
-sampledata
-*xlsx
+Mining
+*msg
+Censored Data Scripts Mo
