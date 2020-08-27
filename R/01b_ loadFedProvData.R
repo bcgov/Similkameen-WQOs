@@ -47,7 +47,7 @@ fedprov1 <- fedprov1 %>% mutate(Value=ifelse(Units == "UG/L", Value/1000, Value 
   mutate(Units = ifelse(Units == "UG/L", "MG/L", Units))
 
 
-##distinct function to summarize any column in dataframe
+##distinct function to summarize unique entries any column in dataframe
 parameter<-distinct(fedprov1, Units)
 
 

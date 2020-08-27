@@ -13,7 +13,11 @@
 
 ## load cleaned fedprov (all_data_sim_fedprov) and EMS
 ## (all_data_sim_EMS) csv files and combine into one
-### make sure packages from 01_load.R are loaded if starting here
+
+library(tidyverse)
+library(plyr)
+library(lubridate)
+library(magrittr)
 
 
 #Load csv's
@@ -59,7 +63,7 @@ parameters3 <- distinct (all_similkameen, Variable, Code, EMS_ID)
 ## Need to standardize names for SO4- and a few nitrogen parameters, tds
 
 #library(plyr)
-all_similkameen$Variable <- revalue (all_similkameen$Variable, c("sulphate"="sulfate dissolved", "sulphate dissolved"="sulfate dissolved", 
+all_similkameen$Variable <- plyr::revalue (all_similkameen$Variable, c("sulphate"="sulfate dissolved", "sulphate dissolved"="sulfate dissolved", 
                                                                  "nitrogen kjel.tot(n)"="nitrogen total kjeldahl",
                                                                  "nitrogen (kjeldahl) total dissolved"="nitrogen dissolved kjeldahl",
                                                                  "colour true"="true color",  "temperature water (field)"="temperature-field",
@@ -67,12 +71,13 @@ all_similkameen$Variable <- revalue (all_similkameen$Variable, c("sulphate"="sul
                                                                  "ammonia dissolved"="nitrogen ammonia dissolved", "temperature water"="temperature",
                                                                  "residue: filterable 1.0u (tds)"="tds", "chlorine res:free"="chlorine residual", 
                                                                  "field ph"="ph-field", "sulfate total" = "sulfate dissolved",  
-                                                                 "nitrogen - nitrite dissolved (no2)"="nitrite dissoved", "nitrogen nitrite"="nitrite total",
+                                                                 "nitrogen - nitrite dissolved (no2)"="nitrite dissolved", "nitrogen nitrite"="nitrite total",
                                                                  "nitrogen no2 total"="nitrite total", "nitrate (no3) dissolved"= "nitrate dissolved",
                                                                  "nitrogen dissolved nitrate" = "nitrate dissolved", "nitrogen total nitrate" = "nitrate dissolved",
                                                                  "nitrate(no3) + nitrite(no2) dissolved"="nitrite and nitrate dissolved",
                                                                  "nitrogen no3 total"="nitrate total", "nitrogen dissolved no3 & no2"="nitrite and nitrate dissolved",
-                                                                 "total nitrogen no2 + no3"="nitrite and nitrate total", "fluoride"="fluoride total"))
+                                                                 "total nitrogen no2 + no3"="nitrite and nitrate total", "fluoride"="fluoride total", 
+                                                                 "coliform - fecal"="fecal coliform", "coliform - total"="total coliform"))
                                                                
                                                                 
                                                                 
@@ -87,10 +92,10 @@ all_similkameen$Variable <- revalue (all_similkameen$Variable, c("sulphate"="sul
 
 
 ## double check that parameter names were standardized
-parameters2 <- distinct (all_similkameen, Variable, Code)
+parameters2 <- distinct (all_similkameen, Variable, Code, Units)
 
 ## Standardize a few Units
-all_similkameen$Units <- revalue (all_similkameen$Units, c("ug/g"="mg/l", "col.unit"="color unit", "cu"="color unit", "ph units"="ph",
+all_similkameen$Units <- plyr::revalue (all_similkameen$Units, c("ug/g"="mg/l", "col.unit"="color unit", "cu"="color unit", "ph units"="ph",
                                                "usie/cm"="us/cm", "c"="deg c"))
 
 

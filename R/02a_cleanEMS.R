@@ -12,11 +12,26 @@
 
 #######################################################################################################################################
 
-### Make sure packages are loaded from 01_load.R
+library(tidyverse)
+library(devtools)
+library(rems)
+library(wqbc)
+library(lubridate)
+library(magrittr)
 
 # Load all_EMS csv
 
 all_EMS <- read_csv("data/report/all_EMS.csv")
+
+
+## Making a csv file of tissue data prior to cleaning
+tissue_data <- all_EMS %>%
+  
+  filter(SAMPLE_STATE == "Animal Tissue") 
+
+##make csv
+write.csv(tissue_data,
+          'C:/R Projects/Similkameen-WQOs/data/report/tissue_EMS.csv', row.names = FALSE)
 
 # Look at the replicate data to investigate whether it should stay in the data set
 
@@ -28,8 +43,8 @@ all_EMS <- read_csv("data/report/all_EMS.csv")
 #  filter(!SAMPLE_CLASS == "Replicate", !SAMPLE_CLASS == "Replicate-First",
 #         !SAMPLE_CLASS == "Replicate-Second", !SAMPLE_CLASS == "Replicate-Third")
 
-# I have decided to proceed without the replicates in the dataset, there are only 199 obs that have been
-# classified as replicates and it is unknow if they are QA/QC samples. I considered keeping the bacteriological
+# Proceeding without the replicates in the dataset, there are only 199 obs that have been
+# classified as replicates and it is unknow if they are QA/QC samples. Considered keeping the bacteriological
 # samples but the reps are atleast 15 years old and there were only 18 rep samples compared to 694 regular
 # samples...moving on
 
@@ -38,8 +53,9 @@ all_EMS <- read_csv("data/report/all_EMS.csv")
 ## Filter raw data to get rid of replicates and obvious errors prior to cleaning
 all_EMS2 <- all_EMS %>%
   # Remove replciate data
-  filter(!SAMPLE_CLASS == "Replicate", !SAMPLE_CLASS == "Replicate-First",
-               !SAMPLE_CLASS == "Replicate-Second", !SAMPLE_CLASS == "Replicate-Third") %>%
+  filter(!SAMPLE_CLASS %in% c("Replicate", "Replicate-First", "Replicate-Second", "Replicate-Third",
+                              "Replicate-Fourth","Replicate - Sequential",
+                              "Blank - field"))  %>%
   # Make sure only fresh water samples are retained
   filter(SAMPLE_STATE =="Fresh Water") %>%
   # Remove results that failed q/c

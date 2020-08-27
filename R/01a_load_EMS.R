@@ -23,23 +23,14 @@
 
 #install_github("bcgov/rems")
 #install_github("bcgov/wqbc", ref = "develop")
-devtools::install_github("bcgov/wqbc")
+#devtools::install_github("bcgov/wqbc")
 
 # Load Packages
 library(tidyverse)
 library(devtools)
 library(rems)
-library(dplyr)
-library(ggplot2)
 library(wqbc)
 library(lubridate)
-library(readr)
-library(directlabels)
-library(forcats)
-library(tidyr)
-library(reshape)
-library(stats)
-library(plyr)
 library(magrittr)
 
 # Load the last 2 years of water quality data for the Similkameen WQO from the BC Data Catalogue using bcgov/rems package.
@@ -51,17 +42,18 @@ twoyear <- get_ems_data(which = "2yr", cols = "all")
 Y
 
 filtered_twoyear <- filter_ems_data(twoyear, emsid =
-      c("E299452", "0500075", "0500724", "0500725", "E207463", "E317970", "E317971",
-      "E318570", "E317973", "E223873", "E223874", "E217193", "E206633", "E206635",
-     "E249949", "E249950", "E250424", "E206824", "E206636", "E206637", "E215956",
-       "E215957", "E206638", "E215954", "E250751", "E206634",
-      "E221413", "E221386", "E221384", "E221387", "E221390", "E221389",
-      "E221340", "E221339", "E221341", "0500757", "E221526", "E221525", "0500083","E303710", 
-     "E303719", "E318571", "0500073",
-     "E266462", "0500101", "E287172", "E318572", "0500003", "1131013", "0500928",
-     "E206818"))
-     
-
+      c("0500075", "0500724", "0500725", "E207463", "E317970", "E317971", "E318570",
+        "E317973", "0500003",
+        "E286689", "E223873", "E223874", "E217193", "E206633", "E206635", "E249949",
+        "E249950", "E250424", "E206824", "E206636", "E206637", "E215956", "E215957",
+        "E206638", "E215954", "E250751", "E206634", "E221413", "E221386", "E221384",
+        "E221387", "E221390", "E221389", "E221340", "E221339", "E221341", "0500757",
+        "E221526", "E221525", "0500083", "E318571", "E266462", "0500101", "E287172",
+        "E307368", "E287171", "E287172", "E287173", "E287174", "E287175", "E287176",
+        "E254310", "0500397", "E254309", "E254311", "E287170", "E287169", "E307367",
+        "0500073", "E318572", "E307638", "E303714"))
+       
+       
 #remove_data_cache("2yr")
 
 # DOWNLOAD HISTORIC DATA
@@ -73,15 +65,16 @@ hist_db <- attach_historic_data()
 
 # Grab data from the Similkameen WQO monitoring sites
 filtered_historic <- hist_db %>%
-  filter(EMS_ID %in%  c("E299452", "0500075", "0500724", "0500725", "E207463", "E317970", "E317971",
-                        "E318570", "E317973", "E223873", "E223874", "E217193", "E206633", "E206635",
-                        "E249949", "E249950", "E250424", "E206824", "E206636", "E206637", "E215956",
-                        "E215957", "E206638", "E215954", "E250751", "E206634",
-                        "E221413", "E221386", "E221384", "E221387", "E221390", "E221389",
-                        "E221340", "E221339", "E221341", "0500757", "E221526", "E221525", "0500083","E303710", 
-                        "E303714", "E318571", "0500073",
-                        "E266462", "0500101", "E287172", "E318572", "0500003", "1131013", "0500928",
-                        "E206818"))
+  filter(EMS_ID %in%  c("0500075", "0500724", "0500725", "E207463", "E317970", "E317971", "E318570",
+                        "E317973", "0500003",
+                        "E286689", "E223873", "E223874", "E217193", "E206633", "E206635", "E249949",
+                        "E249950", "E250424", "E206824", "E206636", "E206637", "E215956", "E215957",
+                        "E206638", "E215954", "E250751", "E206634", "E221413", "E221386", "E221384",
+                        "E221387", "E221390", "E221389", "E221340", "E221339", "E221341", "0500757",
+                        "E221526", "E221525", "0500083", "E318571", "E266462", "0500101", "E287172",
+                        "E307368", "E287171", "E287172", "E287173", "E287174", "E287175", "E287176",
+                        "E254310", "0500397", "E254309", "E254311", "E287170", "E287169", "E307367",
+                        "0500073", "E318572", "E307638", "E303714"))
 
 # Convert the database object into a regular R data object
 filtered_historic <- collect(filtered_historic) %>%
@@ -93,4 +86,5 @@ filtered_historic <- collect(filtered_historic) %>%
 all_EMS <- bind_ems_data(filtered_twoyear, filtered_historic)
 
 # CREATE CSV OF RAW DATA
+#Note it is best to continue to cleaning script as loading the csv comes with parsing errors
 write.csv(all_EMS,'C:/R Projects/Similkameen-WQOs/data/report/all_EMS.csv', row.names = FALSE)
